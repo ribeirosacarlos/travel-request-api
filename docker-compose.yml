@@ -1,23 +1,30 @@
-version: '3.8'
-
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: travel_app
     ports:
       - "8000:8000"
     volumes:
       - .:/var/www/html
     environment:
       - APP_ENV=local
+      - APP_DEBUG=true
+      - DB_HOST=mysql
+      - DB_DATABASE=travel_requests
+      - DB_USERNAME=root
+      - DB_PASSWORD=password
+      - MAIL_HOST=mailpit
     depends_on:
       - mysql
+      - mailpit
     networks:
       - travel-network
 
   mysql:
     image: mysql:8.0
+    container_name: travel_mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: travel_requests
@@ -32,6 +39,7 @@ services:
 
   mailpit:
     image: axllent/mailpit
+    container_name: travel_mailpit
     ports:
       - "1025:1025"
       - "8025:8025"
