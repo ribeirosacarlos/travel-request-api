@@ -10,9 +10,12 @@ use App\Models\TravelRequest;
 use App\Notifications\TravelRequestStatusChanged;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class TravelRequestController extends Controller
 {
+    use AuthorizesRequests;
+
     public function index(ListTravelRequestsRequest $request): AnonymousResourceCollection
     {
         $query = auth()->user()->isAdmin() 
@@ -84,9 +87,9 @@ class TravelRequestController extends Controller
         }
 
         // Enviar notificação se o status mudou
-        if ($oldStatus !== $newStatus) {
-            $travelRequest->user->notify(new TravelRequestStatusChanged($travelRequest, $oldStatus, $newStatus));
-        }
+        // if ($oldStatus !== $newStatus) {
+        //     $travelRequest->user->notify(new TravelRequestStatusChanged($travelRequest, $oldStatus, $newStatus));
+        // }
 
         return response()->json([
             'message' => 'Status atualizado com sucesso',
