@@ -1,0 +1,186 @@
+{
+  "info": {
+    "name": "Travel Request API",
+    "_postman_id": "a1b2c3d4-e5f6-7890-abcd-1234567890ef",
+    "description": "Collection for testing Travel Request API endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Carlos\",\n  \"email\": \"carlos@example.com\",\n  \"password\": \"123456\",\n  \"password_confirmation\": \"123456\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/auth/register",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api","auth","register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"carlos@example.com\",\n  \"password\": \"123456\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api","auth","login"]
+            }
+          }
+        },
+        {
+          "name": "Get Me",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/auth/me",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api","auth","me"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/auth/logout",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api","auth","logout"]
+            }
+          }
+        },
+        {
+          "name": "Refresh",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/auth/refresh",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api","auth","refresh"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Travel Requests",
+      "item": [
+        {
+          "name": "List Travel Requests",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/travel-requests",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api","travel-requests"]
+            }
+          }
+        },
+        {
+          "name": "Create Travel Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Viagem a BH\",\n  \"description\": \"Reunião de negócios\",\n  \"destination\": \"Belo Horizonte\",\n  \"date_start\": \"2025-08-25\",\n  \"date_end\": \"2025-08-27\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/travel-requests",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api","travel-requests"]
+            }
+          }
+        },
+        {
+          "name": "Get Travel Request by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/travel-requests/:id",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api","travel-requests",":id"]
+            }
+          }
+        },
+        {
+          "name": "Update Travel Request Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"approved\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/travel-requests/:id/status",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api","travel-requests",":id","status"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
